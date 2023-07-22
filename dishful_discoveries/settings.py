@@ -31,7 +31,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     '8000-kailangen96-dishful-disc-95kna0uohp.us2.codeanyapp.com',
-    'dishful-discoveries.herokuapp.com']
+    'dishful-discoveries-773712c83723.herokuapp.com']
 
 
 # Application definition
