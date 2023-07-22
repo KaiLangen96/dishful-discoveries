@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div>
+    {% for recipe in recipe_list %}
+    <div>
+        <p class="author">Author: {{ recipe.author }}</p>
+    </div>
+    <a href="#">
+        <h2>{{ recipe.title }}</h2>
+        <p>{{ recipe.excerpt }}</p>
+    </a>
+    <hr>
+    {% endfor %}
+</div>
+
+{%endblock%}
