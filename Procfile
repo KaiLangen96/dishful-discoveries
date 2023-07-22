@@ -1,0 +1,1 @@
+web: gunicorn dishful_discoveries.wsgi
