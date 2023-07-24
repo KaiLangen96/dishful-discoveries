@@ -2,48 +2,60 @@
 
 {% block content %}
 
-<article class="container-fluid">
-    <section class="container-fluid hero-outer hero-image">
-        <div class="row">
-            <div class="col title">
-                <h1 class="welcome-title">Welcome to the Dishful Discoveries!</h1>
-                <hr>
-                <p class="welcome-msg">Exploring a new dish daily!</p>
-            </div>
+<section class="container-fluid hero-outer hero-image">
+    <div class="row">
+        <div class="col title">
+            <h1 class="welcome-title">Welcome to Dishful Discoveries!</h1>
+            <hr>
+            <p class="welcome-msg text-center">Exploring a new dish daily!</p>
         </div>
-    </section>
+    </div>
+</section>
 
-    <section class="features container">
-        <div class="row">
-            <div class="col-12">
-                <h2>Join us today and get access the following features!</h2>
-            </div>
+<section class="features container">
+    <div class="row">
+        <div class="col-12">
+            <h2 class="my-3">Join us today and get access the following features!</h2>
         </div>
-        <hr>
-        <div class="row">
-            <div class="col-12 col-md-3">
-                <div class="feature">
-                    <h3>Browse our recipes for inspiration</h3>
-                </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-12 col-md-3">
+            <div class="feature-image">
+                <a href="#">
+                    <img src="/static/images/light-bulb.png" alt="lightbulb">
+                </a>
             </div>
-            <div class="col-12 col-md-3">
-                <div class="feature">
-                    <h3>Upload and manage your own recipes or like others recipes</h3>
-                </div>
-            </div>
-            <div class="col-12 col-md-3">
-                <div class="feature">
-                    <h3>Grow with the community</h3>
-                </div>
-            </div>
-            <div class="col-12 col-md-3">
-                <div class="feature">
-                    <h3>Generate your shopping list</h3>
-                </div>
-            </div>
+            <h6>Browse our recipes for inspiration</h6>
         </div>
+        <div class="col-12 col-md-3">
+            <div class="feature-image">
+                <a href="#">
+                    <img src="/static/images/light-bulb.png" alt="lightbulb">
+                </a>
+            </div>
+            <h6>Upload and manage your own recipes or like others recipes</h6>
+        </div>
+        <div class="col-12 col-md-3">
+            <div class="feature-image">
+                <a href="#">
+                    <img src="/static/images/light-bulb.png" alt="lightbulb">
+                </a>
+            </div>
+            <h6>Grow with the community</h6>
 
-    </section>
-</article>
+        </div>
+        <div class="col-12 col-md-3">
+            <div class="feature-image">
+                <a href="#">
+                    <img src="/static/images/light-bulb.png" alt="lightbulb">
+                </a>
+            </div>
+            <h6>Generate your shopping list</h6>
+
+        </div>
+    </div>
+
+</section>
 
 {%endblock%}
