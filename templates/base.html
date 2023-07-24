@@ -17,23 +17,25 @@
     <!-- Navbar -->
     <nav class="navbar bg-light navbar-expand-sm">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Dishful Discoveries</a>
+            <a class="navbar-brand" href="{% url 'home' %}">Dishful Discoveries</a>
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+                </li>
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'account_signup' %}">Sign-Up</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Sign-Up</a>
+                    <a class="nav-link" href="{% url 'account_login' %}">Login</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Login</a>
-                </li>
+                {% endif %}
             </ul>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarText"></button>
         </div>
-
-
     </nav>
 
     <main>
