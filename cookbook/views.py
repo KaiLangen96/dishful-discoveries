@@ -27,3 +27,7 @@ class RecipeDetail(View):
                 # "likes": likes,
             }
         )
+
+
+class AddRecipe(View):
+    template_name = 'add_recipe.html'
