@@ -62,4 +62,8 @@ class RecipeDetail(View):
 
 
 class AddRecipe(View):
-    template_name = 'add_recipe.html'
+    def get(self, request, *args, **kwargs):
+        # recipe_form = AddRecipeForm()
+        model = Recipe
+        template_name = 'add_recipe.html'
+        return render(request, template_name)
