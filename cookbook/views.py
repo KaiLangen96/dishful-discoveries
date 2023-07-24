@@ -27,7 +27,6 @@ class RecipeDetail(View):
                 "recipe": recipe,
                 "comments": comments,
                 "comment_form": CommentForm(),
-                # "likes": likes,
             },
         )
 
@@ -35,8 +34,6 @@ class RecipeDetail(View):
         queryset = Recipe.objects.filter(status=1)
         recipe = get_object_or_404(queryset, slug=slug)
         comments = recipe.comments.order_by('created_on')
-        # favourite = False
-        # if recipe.favourites.filter
 
         comment_form = CommentForm(data=request.POST)
 
@@ -55,9 +52,7 @@ class RecipeDetail(View):
             {
                 "recipe": recipe,
                 "comments": comments,
-                # "commented": True,
                 "comment_form": CommentForm()
-                # "favourite": favourite
             },
         )
 
@@ -65,9 +60,9 @@ class RecipeDetail(View):
 class AddRecipe(generic.CreateView):
     form_class = RecipeForm()
     template_name = 'add_recipe.html'
-    success_url = reverse_lazy('add_recipe')
+    success_url = reverse_lazy('home')
 
     def form_valid(self, form):
         form.instance.author = self.request.user
         super(AddRecipe, self).form_valid(form)
-        return redirect('add_recipe')
+        return redirect('home')
