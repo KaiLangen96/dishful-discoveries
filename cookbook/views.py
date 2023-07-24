@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.urls import reverse_lazy
 from django.views import generic, View
 from .models import Recipe
@@ -31,8 +32,8 @@ class RecipeDetail(View):
         )
 
     def post(self, request, slug, *args, **kwargs):
-        queryset = Recipe.objects.filter(status=1)
-        recipe = get_object_or_404(queryset, slug=slug)
+        # Recipe might be the wrong argument:
+        recipe = get_object_or_404(Recipe, slug=slug)
         comments = recipe.comments.order_by('created_on')
 
         comment_form = CommentForm(data=request.POST)
@@ -57,7 +58,7 @@ class RecipeDetail(View):
         )
 
 
-class AddRecipe(generic.CreateView):
+class AddRecipe(LoginRequiredMixin, generic.CreateView):
     form_class = RecipeForm
     template_name = 'add_recipe.html'
 
@@ -66,13 +67,40 @@ class AddRecipe(generic.CreateView):
         return super().form_valid(form)
 
 
-class UpdateRecipe(generic.UpdateView):
+class MyRecipes(LoginRequiredMixin, generic.ListView):
+
     model = Recipe
-    fields = '__all__'
+    queryset = Recipe.objects.all()
+    template_name = 'my_recipes.html'
+    paginate_by = 6
+
+
+class UpdateRecipe(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
+    model = Recipe
+    form_class = RecipeForm
     template_name = 'update_recipe.html'
 
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
 
-class DeleteRecipe(generic.DeleteView):
+    def test_func(self):
+        """
+        Prevent another user from deleting recipes
+        """
+
+        recipe = self.get_object()
+        return recipe.author == self.request.user
+
+
+class DeleteRecipe(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView):
     model = Recipe
     template_name = 'delete_recipe.html'
     success_url = reverse_lazy('home')
+
+    def test_func(self):
+        """
+        Prevent another user from deleting recipes
+        """
+        recipe = self.get_object()
+        return recipe.author == self.request.user
