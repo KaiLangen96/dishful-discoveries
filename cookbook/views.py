@@ -58,18 +58,21 @@ class RecipeDetail(View):
 
 
 class AddRecipe(generic.CreateView):
-    form_class = RecipeForm()
+    form_class = RecipeForm
     template_name = 'add_recipe.html'
-    success_url = reverse_lazy('home')
 
     def form_valid(self, form):
         form.instance.author = self.request.user
-        super(AddRecipe, self).form_valid(form)
-        return redirect('home')
+        return super().form_valid(form)
 
 
 class UpdateRecipe(generic.UpdateView):
     model = Recipe
     fields = '__all__'
     template_name = 'update_recipe.html'
+
+
+class DeleteRecipe(generic.DeleteView):
+    model = Recipe
+    template_name = 'delete_recipe.html'
     success_url = reverse_lazy('home')
