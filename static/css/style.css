@@ -50,3 +50,8 @@ h6 {
     object-fit: cover;
     width: 100%;
 }
+
+.add-recipe {
+    width: 80%;
+    margin: 0 auto;
+}
