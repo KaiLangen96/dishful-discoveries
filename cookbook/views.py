@@ -7,17 +7,21 @@ from .models import Recipe
 from .forms import CommentForm, RecipeForm
 
 
+class Home(View):
+    def get(self, request):
+        return render(request, 'index.html')
+
+
 class RecipeList(generic.ListView):
     model = Recipe
     queryset = Recipe.objects.order_by('-created_on')
-    template_name = 'index.html'
+    template_name = 'browse_recipes.html'
     paginate_by = 6
 
 
 class RecipeDetail(View):
 
     def get(self, request, slug, *args, **kwargs):
-        # Recipe might be the wrong argument:
         recipe = get_object_or_404(Recipe, slug=slug)
         comments = recipe.comments.order_by('created_on')
         liked = False
@@ -36,7 +40,6 @@ class RecipeDetail(View):
         )
 
     def post(self, request, slug, *args, **kwargs):
-        # Recipe might be the wrong argument:
         recipe = get_object_or_404(Recipe, slug=slug)
         comments = recipe.comments.order_by('created_on')
         liked = False
