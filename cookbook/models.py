@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django_extensions.db.fields import AutoSlugField
 from cloudinary.models import CloudinaryField
 
 
@@ -13,7 +14,7 @@ class Category(models.Model):
 
 class Recipe(models.Model):
     title = models.CharField(max_length=70, unique=True)
-    slug = models.SlugField(max_length=70, unique=True)
+    slug = AutoSlugField(populate_from='title', unique=True)
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='recipes')
     category = models.ForeignKey(
