@@ -6,6 +6,20 @@
 
 <div class="container">
     <h1> {{ recipe.title }} </h1>
+    {% if user.is_authenticated %}
+    <form class="d-inline" action="{% url  'like_recipe' recipe.slug %}" method="POST">
+        {% csrf_token %}
+        {% if favourited %}
+        <button type="submit" name="blogpost_id" value="{{recipe.slug}}" class="btn-like"><i
+                class="fas fa-heart"></i></button>
+        {% else %}
+        <button type="submit" name="blogpost_id" value="{{recipe.slug}}" class="btn-like"><i
+                class="far fa-heart"></i></button>
+        {% endif %}
+    </form>
+    {% else %}
+    <span class="text-secondary"><i class="far fa-heart"></i></span>
+    {% endif %}
     <div>
         <p class="author">Author: {{ recipe.author }} </p>
     </div>

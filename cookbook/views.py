@@ -1,6 +1,7 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.urls import reverse_lazy
+from django.http import HttpResponseRedirect
 from django.views import generic, View
 from .models import Recipe
 from .forms import CommentForm, RecipeForm
@@ -19,7 +20,9 @@ class RecipeDetail(View):
         # Recipe might be the wrong argument:
         recipe = get_object_or_404(Recipe, slug=slug)
         comments = recipe.comments.order_by('created_on')
-        # Add Like filter
+        liked = False
+        if recipe.likes.filter(id=self.request.user.id).exists():
+            liked = True
 
         return render(
             request,
@@ -28,6 +31,7 @@ class RecipeDetail(View):
                 "recipe": recipe,
                 "comments": comments,
                 "comment_form": CommentForm(),
+                "liked": liked,
             },
         )
 
@@ -35,6 +39,9 @@ class RecipeDetail(View):
         # Recipe might be the wrong argument:
         recipe = get_object_or_404(Recipe, slug=slug)
         comments = recipe.comments.order_by('created_on')
+        liked = False
+        if recipe.likes.filter(id=self.request.user.id).exists():
+            liked = True
 
         comment_form = CommentForm(data=request.POST)
 
@@ -53,7 +60,8 @@ class RecipeDetail(View):
             {
                 "recipe": recipe,
                 "comments": comments,
-                "comment_form": CommentForm()
+                "comment_form": CommentForm(),
+                "liked": liked,
             },
         )
 
@@ -104,3 +112,20 @@ class DeleteRecipe(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView):
         """
         recipe = self.get_object()
         return recipe.author == self.request.user
+
+
+class LikeRecipe(LoginRequiredMixin, View):
+    def post(self, request, slug, *args, **kwargs):
+        recipe = get_object_or_404(Recipe, slug=slug)
+        if recipe.likes.filter(id=request.user.id).exists():
+            recipe.likes.remove(request.user)
+        else:
+            recipe.likes.add(request.user)
+        return HttpResponseRedirect(reverse('recipe_detail', args=[slug]))
+
+
+class MyLikes(LoginRequiredMixin, generic.ListView):
+    def get(self, request):
+        liked_recipes = Recipe.objects.filter(likes=request.user.id)
+        return render(
+            request, 'my_likes.html', {'liked_recipes': liked_recipes})

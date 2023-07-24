@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+    {% for recipe in liked_recipes %}
+    <h2>{{ recipe.title }}</h2>
+    <p>{{ recipe.excerpt }}</p>
+    {% endfor %}
+</div>
+
+{%endblock%}
