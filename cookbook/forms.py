@@ -14,6 +14,7 @@ class RecipeForm(forms.ModelForm):
         model = Recipe
         fields = [
             'title',
+            'category',
             'excerpt',
             'content',
             'image',
