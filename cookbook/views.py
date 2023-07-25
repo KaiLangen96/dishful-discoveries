@@ -91,9 +91,14 @@ class AddRecipe(LoginRequiredMixin, SuccessMessageMixin, generic.CreateView):
 
 class MyRecipes(LoginRequiredMixin, generic.ListView):
     model = Recipe
-    queryset = Recipe.objects.all()
     template_name = 'my_recipes.html'
     paginate_by = 8
+
+    def get_queryset(self):
+        """
+        Override get_queryset to filter by user
+        """
+        return Recipe.objects.filter(author=self.request.user)
 
 
 class UpdateRecipe(LoginRequiredMixin, UserPassesTestMixin,
@@ -157,11 +162,15 @@ class LikeRecipe(LoginRequiredMixin, View):
 
 
 class MyLikes(LoginRequiredMixin, generic.ListView):
+    model = Recipe
+    template_name = 'my_likes.html'
+    paginate_by = 8
 
-    def get(self, request):
-        liked_recipes = Recipe.objects.filter(likes=request.user.id)
-        return render(
-            request, 'my_likes.html', {'liked_recipes': liked_recipes})
+    def get_queryset(self):
+        """
+        Override get_queryset to filter by user likes
+        """
+        return Recipe.objects.filter(likes=self.request.user.id)
 
 
 class UpdateComment(LoginRequiredMixin, UserPassesTestMixin,
