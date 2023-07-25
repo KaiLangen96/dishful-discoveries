@@ -2,68 +2,29 @@
 
 {% block content %}
 
-<section class="container-fluid">
-    <div class="jumbotron jumbotron-fluid">
-        <div class="row h-50 align-items-center">
-            <div class="col">
-                <h1 class="landing-title">Dishful Discoveries</h1>
-            </div>
-        </div>
-        <div class="row h-50 align-items-center">
-            <div class="col offset-md-1">
-                <p class="landing-tagline">Exploring a new dish daily!</p>
-            </div>
-        </div>
+<section>
+    <div class="container">
+
     </div>
 </section>
-<section class="container-fluid green-background features-outer text-light">
-    <div class="row">
-        <div class="col-12">
-            <h2 class="my-3 text-light">Join us today and get access the following features!</h2>
+
+
+<div class="container px-2 py-5">
+    <div class="row flex-lg-row-reverse py-5">
+        <div class="col-lg-5 pl-md-5">
+            <img src="/static/images/family_dinner.jpg" class="img-fluid family-image" alt="family_dinner">
         </div>
-    </div>
-    <div class="row mb-5">
-        <div class="col-12">
-            <p class="my-3 text-center">Tired of the same food every day? Unsure what to cook again? Dishful Discoveries
-                is the answer! Find new recipes to cook today!
+        <div class="col-lg-7 hero-text-outer text-center">
+            <h1 class="m-4 hero-text">Sign up today to get started</h1>
+            <p class="lead">
+                This is a lead paragraph. It stands out from regular paragraphs.
             </p>
-        </div>
-    </div>
-    <div class="container-fluid feature-image-outer">
-        <div class="row">
-            <div class="col-12 col-md-4 mb-2">
-                <div class="feature-image mb-2">
-                    <a href="#">
-                        <img src="/static/images/light-bulb.png" alt="lightbulb">
-                    </a>
-                </div>
-                <h3 class="text-light">Browse</h3>
-                <p class="feature-text">Scroll through a picture book of delicous recipes until you find the next dish
-                    for you!
-                </p>
-            </div>
-            <div class="col-12 col-md-4 mb-2">
-                <div class="feature-image mb-2">
-                    <a href="#">
-                        <img src="/static/images/light-bulb.png" alt="lightbulb">
-                    </a>
-                </div>
-                <h3 class="text-light">Upload or Like</h3>
-                <p class="feature-text">Upload and manage your own recipes or like the recipe of others and create your
-                    own cookbook!</p>
-            </div>
-            <div class="col-12 col-md-4 mb-2">
-                <div class="feature-image mb-2">
-                    <a href="#">
-                        <img src="/static/images/light-bulb.png" alt="lightbulb">
-                    </a>
-                </div>
-                <h3 class="text-light">Grow</h3>
-                <p class="feature-text">Grow with the community! Start conversations about potential improvements to
-                    others recipes right below their recipe with the comments feature!</p>
+            <div>
+                <button type="button" class="btn btn-primary btn-lg">Sign up!</button>
             </div>
         </div>
     </div>
-</section>
+</div>
+
 
 {%endblock%}

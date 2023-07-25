@@ -15,7 +15,10 @@ class Home(View):
     """
     This view is used to display the home page
     """
-    template_name = "index.html"
+    # template_name = 'index.html'
+
+    def get(self, request):
+        return render(request, 'index.html')
 
 
 class RecipeList(generic.ListView):
