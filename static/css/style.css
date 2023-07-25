@@ -1,10 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Montserrat:wght@300;400&family=Oswald:wght@300;600&display=swap');
+
+body {
+    font-family: Montserrat, sans-serif;
+    font-weight: 300;
+}
+
+
 h1,
 h2,
 h6 {
     text-align: center;
 }
 
-
+.page-title {
+    text-align: center;
+    margin-top: 15px;
+}
 
 .hero-outer {
     height: 60vh;
@@ -12,23 +23,19 @@ h6 {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
-
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-
 .feature-image {
     height: 80px;
-    width: 80px;
+    /* width: 80px; */
     text-align: center;
     margin: 0 auto;
-
 }
 
 .card-img {
-
     height: 350px;
     /* object-fit: cover;
     min-height: 200px; */
@@ -39,7 +46,6 @@ h6 {
 .card-detail {
     border: none;
 }
-
 
 .recipe-detail-card {
     border: none;
@@ -54,4 +60,8 @@ h6 {
 .add-recipe {
     width: 80%;
     margin: 0 auto;
+}
+
+.profile-icon {
+    padding-right: 5px;
 }
