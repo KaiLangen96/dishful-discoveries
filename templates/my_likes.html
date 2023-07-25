@@ -3,10 +3,26 @@
 {% block content %}
 
 <div class="container">
-    {% for recipe in liked_recipes %}
-    <h2>{{ recipe.title }}</h2>
-    <p>{{ recipe.excerpt }}</p>
-    {% endfor %}
+    <div class="row">
+        <div class="col">
+            <h1>My Likes</h1>
+        </div>
+    </div>
+    <div class="row">
+        {% for recipe in like_recipes %}
+        <div class="col-sm-3 px-1">
+            <div class="card card-detail mb-3">
+                <img src="/static/images/meatballs.jpg" class="card-img-top img-fluid card-img" alt="meatballs">
+                <div class="card-body">
+                    <h5 class="card-title">{{ recipe.title }}</h5>
+                    <p class="card-text">{{ recipe.excerpt }}</p>
+                    <a href="{% url 'recipe_detail' recipe.slug %}" class="btn btn-primary">View</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
 </div>
 
 {%endblock%}

@@ -6,17 +6,17 @@
 
 <div class="container">
     <h1 class="mt-5">Add Recipe</h1>
-    <div class="card mb-4 mt-3" style="border: none;">
-        <div class="card-body">
-            {% if user.is_authenticated %}
-            <form method="post" class="add-recipe">
-                {{ form | crispy }}
-                {% csrf_token %}
+    <div class="row">
+        {% if user.is_authenticated %}
+        <form method="post" class="add-recipe">
+            <div class="col">
+                <div class="card">
+                    {{ form | crispy }}
+                    {% csrf_token %}
+                </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
-                <h3 class="card-title">Add your Recipe:</h3>
-            </form>
+            </div>
             {% endif %}
-        </div>
     </div>
 </div>
 
