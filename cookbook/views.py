@@ -5,11 +5,12 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
 from django.views import generic, View
-from .models import Recipe
+from .models import Recipe, Comment
 from .forms import CommentForm, RecipeForm
 
 
 class Home(View):
+
     def get(self, request):
         return render(request, 'index.html')
 
@@ -88,15 +89,14 @@ class AddRecipe(LoginRequiredMixin, SuccessMessageMixin, generic.CreateView):
 
 
 class MyRecipes(LoginRequiredMixin, generic.ListView):
-
     model = Recipe
     queryset = Recipe.objects.all()
     template_name = 'my_recipes.html'
     paginate_by = 6
 
 
-class UpdateRecipe(
-        LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, generic.UpdateView):
+class UpdateRecipe(LoginRequiredMixin, UserPassesTestMixin,
+                   SuccessMessageMixin, generic.UpdateView):
     model = Recipe
     form_class = RecipeForm
     template_name = 'update_recipe.html'
@@ -110,7 +110,6 @@ class UpdateRecipe(
         """
         Prevent another user from deleting recipes
         """
-
         recipe = self.get_object()
         return recipe.author == self.request.user
 
@@ -121,8 +120,8 @@ class UpdateRecipe(
         )
 
 
-class DeleteRecipe(
-        LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView):
+class DeleteRecipe(LoginRequiredMixin, UserPassesTestMixin,
+                   generic.DeleteView):
     model = Recipe
     template_name = 'delete_recipe.html'
     success_message = "Recipe deleted successfully"
@@ -135,25 +134,56 @@ class DeleteRecipe(
         recipe = self.get_object()
         return recipe.author == self.request.user
 
-    # cannot use SucessMessageMixin on delete view. Found this alternative method on stack
-    # over flow: https://stackoverflow.com/questions/24822509/success-message-in-deleteview-not-shown
+    # cannot use SucessMessageMixin on delete view.
+    # Found this alternative method on stackoverflow:
+    # https://stackoverflow.com/questions/24822509/success-message-in-deleteview-not-shown
     def delete(self, request, *args, **kwargs):
         messages.success(self.request, self.success_message)
         return super(DeleteRecipe, self).delete(request, *args, **kwargs)
 
 
 class LikeRecipe(LoginRequiredMixin, View):
+
     def post(self, request, slug, *args, **kwargs):
         recipe = get_object_or_404(Recipe, slug=slug)
         if recipe.likes.filter(id=request.user.id).exists():
             recipe.likes.remove(request.user)
+            messages.success(self.request, 'Recipe removed from likes')
         else:
             recipe.likes.add(request.user)
+            messages.success(self.request, 'Recipe added to likes')
         return HttpResponseRedirect(reverse('recipe_detail', args=[slug]))
 
 
 class MyLikes(LoginRequiredMixin, generic.ListView):
+
     def get(self, request):
         liked_recipes = Recipe.objects.filter(likes=request.user.id)
         return render(
             request, 'my_likes.html', {'liked_recipes': liked_recipes})
+
+
+class UpdateComment(LoginRequiredMixin, UserPassesTestMixin,
+                    SuccessMessageMixin, generic.UpdateView):
+    model = Comment
+    form_class = CommentForm
+    template_name = 'update_comment.html'
+    success_message = "Comment updated successfully"
+
+    def form_valid(self, form):
+        form.instance.name = self.request.user.username
+        return super().form_valid(form)
+
+    def test_func(self):
+        """
+        Prevent another user from editing user's comments
+        """
+        comment = self.get_object()
+        return comment.name == self.request.user.username
+
+    def get_success_url(self):
+        """
+        Return to recipe detail view when comment updated sucessfully
+        """
+        recipe = self.object.recipe
+        return reverse_lazy('recipe_detail', kwargs={'slug': recipe.slug})
