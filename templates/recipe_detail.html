@@ -22,17 +22,13 @@
                     <div class="row">
                         <div class="col-2 col-md-1 pr-0"><i class="far fa-clock"></i></div>
                         <div class="col-10 col-md-11 pl-0">
-                            <p>
-                                Prep Time: {{ recipe.preparation_time }}
-                            </p>
+                            <p>Prep Time: {{ recipe.preparation_time }}</p>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-2 col-md-1 pr-0"><i class="far fa-clock"></i></div>
                         <div class="col-10 col-md-11 pl-0">
-                            <p>
-                                Cook Time: {{ recipe.cook_time }}
-                            </p>
+                            <p>Cook Time: {{ recipe.cook_time }}</p>
                         </div>
                     </div>
                     {% if user.is_authenticated %}
@@ -40,23 +36,22 @@
                         {% csrf_token %}
                         {% if liked %}
                         <button type="submit" name="blogpost_id" value="{{recipe.slug}}" class="btn-like">
-                            <i class="fas fa-heart"></i></button>
+                            <i class="fas fa-heart"></i>
+                        </button>
                         {% else %}
                         <button type="submit" name="blogpost_id" value="{{recipe.slug}}" class="btn-like">
-                            <i class="far fa-heart"></i></button>
+                            <i class="far fa-heart"></i>
+                        </button>
                         {% endif %}
-
                     </form>
                     {% else %}
                     <span class="text-secondary"><i class="far fa-heart"></i></span>
                     {% endif %}
                 </div>
-
             </div>
         </div>
     </div>
 </div>
-
 <div class="container">
     <div class="row">
         <div class="col-md-6">
@@ -66,22 +61,17 @@
                     <li class="list-group-item">{{ recipe.ingredients | safe }}</li>
                 </ul>
             </div>
-
         </div>
         <div class="col-md-6">
             <div class="card mb-3">
                 <h5 class="card-header">Method</h5>
                 <div class="card-body">
-
                     <p class="card-text">{{ recipe.content | safe }}</p>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-
-
 <hr>
 <div class="container">
     <div class="row">
