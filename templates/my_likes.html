@@ -10,18 +10,18 @@
     </div>
     <div class="row">
         {% for recipe in like_recipes %}
-        <div class="col-sm-3 px-1">
-            <div class="card card-detail mb-3">
+        <div class="col-sm-3 px-1 d-flex align-items-stretch">
+            <div class="card card-detail mb-3 shadow-sm">
                 {% if "placeholder" in recipe.image.url %}
                 <img src="https://res.cloudinary.com/kailangen/image/upload/v1690288515/placeholder.jpg"
-                    class="card-img-top img-fluid card-img" alt="placeholder image">
+                    class="card-img-top" alt="placeholder image">
                 {% else %}
-                <img src=" {{ recipe.image.url }}" alt="recipe image" class="card-img-top img-fluid card-img">
+                <img src=" {{ recipe.image.url }}" alt="recipe image" class="card-img-top">
                 {% endif %}
                 <div class="card-body">
                     <h5 class="card-title">{{ recipe.title }}</h5>
                     <p class="card-text">{{ recipe.excerpt }}</p>
-                    <a href="{% url 'recipe_detail' recipe.slug %}" class="btn btn-primary">View</a>
+                    <a href="{% url 'recipe_detail' recipe.slug %}" class="stretched-link"></a>
                 </div>
             </div>
         </div>
@@ -29,5 +29,7 @@
     </div>
 
 </div>
+
+{% include "paginator.html" %}
 
 {%endblock%}

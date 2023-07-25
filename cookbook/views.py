@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.core.paginator import Paginator
 from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
 from django.views import generic, View
@@ -19,7 +20,7 @@ class RecipeList(generic.ListView):
     model = Recipe
     queryset = Recipe.objects.order_by('-created_on')
     template_name = 'browse_recipes.html'
-    paginate_by = 6
+    paginate_by = 8
 
 
 class RecipeDetail(View):
@@ -92,7 +93,7 @@ class MyRecipes(LoginRequiredMixin, generic.ListView):
     model = Recipe
     queryset = Recipe.objects.all()
     template_name = 'my_recipes.html'
-    paginate_by = 6
+    paginate_by = 8
 
 
 class UpdateRecipe(LoginRequiredMixin, UserPassesTestMixin,
@@ -189,7 +190,8 @@ class UpdateComment(LoginRequiredMixin, UserPassesTestMixin,
         return reverse_lazy('recipe_detail', kwargs={'slug': recipe.slug})
 
 
-class DeleteComment(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView):
+class DeleteComment(LoginRequiredMixin, UserPassesTestMixin,
+                    generic.DeleteView):
     model = Comment
     template_name = 'delete_comment.html'
     success_message = "Comment deleted successfully"
