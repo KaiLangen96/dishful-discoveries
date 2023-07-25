@@ -16,52 +16,58 @@
                     {% endif %}
                 </div>
                 <div class="col-12 col-md-8">
-                    <div class="card-body recipe-detail-outer py-2">
-                        <div>
-                            <h1 class="card-title page-title recipe-detail-title text-left">{{ recipe.title }}</h1>
+                    <div class="card-body h-100">
+                        <div class="row h-50">
+                            <div class="col">
+                                <h1 class="card-title page-title text-left d-sm-inline">{{ recipe.title }}</h1>
+                                <p class="card-text">Author: {{ recipe.author }}</p>
+                            </div>
                         </div>
-                        <p class="card-text">Author: {{ recipe.author }}</p>
-                        <div class="mb-5">
-                            <p>
-                                <span><i class="far fa-clock pr-2"></i></span>
-                                <span>Prep Time: {{ recipe.preparation_time }}</span>
-                            </p>
-                            <p>
-                                <span><i class="far fa-clock pr-2"></i></span>
-                                <span>Cook Time: {{ recipe.cook_time }}</span>
-                            </p>
+                        <div class="row">
+                            <div class="col-2 col-md-1 pr-0"><i class="far fa-clock"></i></div>
+                            <div class="col-10 col-md-11 pl-0">
+                                <p>Prep Time: {{ recipe.preparation_time }}</p>
+                            </div>
                         </div>
-                        <!-- recipe action buttons -->
-                        <div class="action-buttons-outer d-block">
-                            <span>
-                                <form class="d-inline" action="{% url 'like_recipe' recipe.slug %}" method="POST">
-                                    {% csrf_token %}
-                                    {% if liked %}
-                                    <button class="action-btn btn btn-info" type="submit" name="like_id"
-                                        value="{{recipe.slug}}">
-                                        <i class="fas fa-heart"></i>
-                                    </button>
-                                    {% else %}
-                                    <button class="action-btn btn btn-info" type="submit" name="like_id"
-                                        value="{{recipe.slug}}">
-                                        <i class="far fa-heart"></i>
-                                    </button>
+                        <div class="row">
+                            <div class="col-2 col-md-1 pr-0"><i class="far fa-clock"></i></div>
+                            <div class="col-10 col-md-11 pl-0">
+                                <p>Cook Time: {{ recipe.cook_time }}</p>
+                            </div>
+                        </div>
+                        <!-- Recipe Action Buttons -->
+                        <div class="row h-25 pb-2">
+                            <div class="col align-self-end">
+                                <span>
+                                    {% if user.is_authenticated %}
+                                    <form class="d-inline" action="{% url 'like_recipe' recipe.slug %}" method="POST">
+                                        {% csrf_token %}
+                                        {% if favourited %}
+                                        <button class="action-btn btn btn-info" type="submit" name="like_id"
+                                            value="{{recipe.slug}}">
+                                            <i class="fas fa-heart"></i>
+                                        </button>
+                                        {% else %}
+                                        <button class="action-btn btn btn-info" type="submit" name="like_id"
+                                            value="{{recipe.slug}}"><i class="far fa-heart"></i>
+                                        </button>
+                                        {% endif %}
+                                    </form>
                                     {% endif %}
-                                </form>
+                                </span>
+                                {% if user.is_authenticated and recipe.author == user %}
+                                <span>
+                                    <a class="action-btn btn btn-info" href="{% url 'update_recipe' recipe.slug %}">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                </span>
+                                <span>
+                                    <a class="action-btn btn btn-info" href="{% url 'delete_recipe' recipe.slug %}">
+                                        <i class="fas fa-times"></i>
+                                    </a>
+                                </span>
                                 {% endif %}
-                            </span>
-                            {% if user.is_authenticated and recipe.author == user %}
-                            <span>
-                                <a class="action-btn btn btn-info" href="{% url 'update_recipe' recipe.slug %}">
-                                    <i class="fas fa-edit"></i>
-                                </a>
-                            </span>
-                            <span>
-                                <a class="action-btn btn btn-info" href="{% url 'delete_recipe' recipe.slug %}">
-                                    <i class="fas fa-times"></i>
-                                </a>
-                            </span>
-                            {% endif %}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -118,12 +124,9 @@
                             </span>
                             {% if user.is_authenticated and user.username == comment.name %}
                             <span class="comment-action-btn pl-2">
-                                <a href="{% url 'update_comment' comment.id %}">
-                                    <i class="fas fa-edit link-primary"></i>
-                                </a>
-                                <a href="{% url 'delete_comment' comment.id %}">
-                                    <i class="fas fa-times"></i>
-                                </a>
+                                <a href="{% url 'update_comment' comment.id %}"><i
+                                        class="fas fa-edit link-primary"></i></a>
+                                <a href="{% url 'delete_comment' comment.id %}"><i class="fas fa-times"></i></a>
                             </span>
                             {% endif %}
                         </p>
@@ -137,6 +140,7 @@
     </div>
 </div>
 {% endif %}
+
 {% if user.is_authenticated %}
 <div class="container">
     <div class="row">
