@@ -213,10 +213,16 @@ h6 {
 @media screen and (max-width: 767.98px) {
     .landing-tagline {
         width: 100%;
-
-
     }
 
+    .logo-image {
+        height: 70px;
+    }
+
+    .social-networks i {
+        font-size: 120%;
+        padding: 0 20px;
+    }
 }
 
 /* For Medium devices (tablets, less than 992px) */
@@ -227,6 +233,10 @@ h6 {
 
     .feature-image-outer {
         width: 90%;
+    }
+
+    .logo-image {
+        height: 75px;
     }
 }
 
