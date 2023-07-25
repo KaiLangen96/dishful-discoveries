@@ -5,11 +5,23 @@ body {
     font-weight: 300;
 }
 
-
 h1,
 h2,
 h6 {
     text-align: center;
+}
+
+.landing-title {
+    color: darkslategrey;
+    font-size: 90px;
+    font-weight: 300;
+}
+
+.landing-tagline {
+    color: darkslategrey;
+    font-size: 30px;
+    font-weight: 300;
+    width: 30%;
 }
 
 .page-title {
@@ -17,15 +29,13 @@ h6 {
     margin-top: 15px;
 }
 
-.hero-outer {
-    height: 60vh;
-    background-image: url("/static/images/family_dinner.jpg");
+/* linear gradient credit: https://bootstrapcreative.com/pattern/jumbotron-background-image-opacity-bootstrap-4/ */
+.jumbotron {
+    height: 100vh;
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.9) 100%), url("/static/images/family_dinner.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .card-img-top {

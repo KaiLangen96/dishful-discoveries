@@ -30,3 +30,6 @@ class RecipeForm(forms.ModelForm):
             'content': SummernoteWidget(),
             'ingredients': SummernoteWidget(),
         }
+
+    def clean_title(self):
+        return self.cleaned_data['title'].title()
