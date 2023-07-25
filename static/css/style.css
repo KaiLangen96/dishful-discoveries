@@ -95,6 +95,11 @@ h6 {
     width: 100%;
 }
 
+.action-btn {
+    font-size: .75rem;
+    width: 40px;
+}
+
 .add-recipe label {
     color: white;
     font-weight: bold;
