@@ -57,6 +57,10 @@ INSTALLED_APPS = [
     'cookbook',
 ]
 
+SUMMERNOTE_CONFIG = {
+    'width': '100%',
+}
+
 SITE_ID = 1
 
 LOGIN_REDIRECT_URL = '/'

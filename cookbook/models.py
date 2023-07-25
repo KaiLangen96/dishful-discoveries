@@ -21,7 +21,10 @@ class Recipe(models.Model):
     category = models.ForeignKey(
         Category, on_delete=models.CASCADE, related_name='category')
     updated_on = models.DateTimeField(auto_now=True)
+    preparation_time = models.CharField(max_length=10, default=0)
+    cook_time = models.CharField(max_length=10, default=0)
     content = models.TextField()
+    ingredients = models.TextField()
     image = CloudinaryField('image', default='placeholder')
     excerpt = models.TextField(blank=True)
     created_on = models.DateTimeField(auto_now_add=True)

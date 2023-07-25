@@ -11,16 +11,22 @@ class CommentForm(forms.ModelForm):
 
 class RecipeForm(forms.ModelForm):
 
+    def __init__(self, *args, **kwargs):
+        super(RecipeForm, self).__init__(*args, **kwargs)
+
     class Meta:
         model = Recipe
         fields = [
             'title',
             'category',
             'excerpt',
+            'preparation_time',
+            'cook_time',
             'content',
+            'ingredients',
             'image',
         ]
         widgets = {
-            'excerpt': SummernoteInplaceWidget(),
-            'content': SummernoteInplaceWidget()
+            'content': SummernoteWidget(),
+            'ingredients': SummernoteWidget(),
         }

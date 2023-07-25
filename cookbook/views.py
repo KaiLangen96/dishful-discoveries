@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404, reverse
+from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
@@ -86,7 +86,8 @@ class MyRecipes(LoginRequiredMixin, generic.ListView):
     paginate_by = 6
 
 
-class UpdateRecipe(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
+class UpdateRecipe(
+        LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
     model = Recipe
     form_class = RecipeForm
     template_name = 'update_recipe.html'
@@ -104,7 +105,8 @@ class UpdateRecipe(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
         return recipe.author == self.request.user
 
 
-class DeleteRecipe(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView):
+class DeleteRecipe(
+        LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView):
     model = Recipe
     template_name = 'delete_recipe.html'
     success_url = reverse_lazy('home')
