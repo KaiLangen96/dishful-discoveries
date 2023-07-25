@@ -16,7 +16,7 @@
                     {% endif %}
                 </div>
                 <div class="col-12 col-md-8">
-                    <div class="card-body">
+                    <div class="card-body h-100">
                         <h1 class="card-title text-left d-sm-inline">{{ recipe.title }}</h1>
                         <p class="card-text">Author: {{ recipe.author }}</p>
                         <div class="row">
@@ -32,7 +32,7 @@
                             </div>
                         </div>
                         {% if user.is_authenticated %}
-                        <form class="d-inline" action="{% url 'like_recipe' recipe.slug %}" method="POST">
+                        <form action="{% url 'like_recipe' recipe.slug %}" method="POST">
                             {% csrf_token %}
                             {% if favourited %}
                             <button type="submit" name="like_id" value="{{recipe.slug}}">
@@ -46,91 +46,87 @@
                         <span class="text-secondary"><i class="far fa-heart"></i></span>
                         {% endif %}
                         {% if user.is_authenticated and recipe.author == user %}
-                        <div class="d-inline">
-                            <a class="btn btn-info d-sm-inline mb-3 ml-sm-5"
-                                href="{% url 'update_recipe' recipe.slug %}">
-                                <i class="fas fa-edit"></i>
-                            </a>
-                            <a class="btn btn-info d-sm-inline mb-3 ml-sm-5"
-                                href="{% url 'delete_recipe' recipe.slug %}">
-                                <i class="fas fa-times"></i>
-                            </a>
-                        </div>
+                        <a class="btn btn-info d-sm-inline mb-3 ml-sm-5" href="{% url 'update_recipe' recipe.slug %}">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <a class="btn btn-info d-sm-inline mb-3 ml-sm-5" href="{% url 'delete_recipe' recipe.slug %}">
+                            <i class="fas fa-times"></i>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="container text-center">
-        <div class="row">
-            <div class="col">
-                <div class="card mb-3 recipe-detail-card">
-                    <h5 class="card-header recipe-detail-card">Description</h5>
-                    <div class="card-body">
-                        <p class="card-text">{{ recipe.excerpt | safe }}</p>
-                    </div>
+</div>
+<div class="container text-center">
+    <div class="row">
+        <div class="col">
+            <div class="card mb-3 recipe-detail-card">
+                <h5 class="card-header recipe-detail-card">Description</h5>
+                <div class="card-body">
+                    <p class="card-text">{{ recipe.excerpt | safe }}</p>
                 </div>
             </div>
         </div>
     </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="card mb-3 recipe-detail-card">
-                    <h5 class="card-header recipe-detail-card">Ingredients</h5>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">{{ recipe.ingredients | safe }}</li>
-                    </ul>
-                </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card mb-3 recipe-detail-card">
+                <h5 class="card-header recipe-detail-card">Ingredients</h5>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">{{ recipe.ingredients | safe }}</li>
+                </ul>
             </div>
-            <div class="col-md-6">
-                <div class="card mb-3 recipe-detail-card">
-                    <h5 class="card-header recipe-detail-card">Method</h5>
-                    <div class="card-body">
-                        <p class="card-text">{{ recipe.content | safe }}</p>
-                    </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card mb-3 recipe-detail-card">
+                <h5 class="card-header recipe-detail-card">Method</h5>
+                <div class="card-body">
+                    <p class="card-text">{{ recipe.content | safe }}</p>
                 </div>
             </div>
         </div>
     </div>
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <div class="card mt-3 ">
-                    <div class="card-body">
-                        <h3 class="card-title">Comments:</h3>
-                        {% for comment in comments %}
-                        <div>
-                            <p class="font-weight-bold">
-                                {{ comment.name }}
-                                <span class=" text-muted font-weight-normal">
-                                    {{ comment.created_on }}
-                                </span> wrote:
-                            </p>
-                            {{ comment.body | linebreaks }}
-                            <hr>
-                        </div>
-                        {% endfor %}
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="card mt-3 ">
+                <div class="card-body">
+                    <h3 class="card-title">Comments:</h3>
+                    {% for comment in comments %}
+                    <div>
+                        <p class="font-weight-bold">
+                            {{ comment.name }}
+                            <span class=" text-muted font-weight-normal">
+                                {{ comment.created_on }}
+                            </span> wrote:
+                        </p>
+                        {{ comment.body | linebreaks }}
+                        <hr>
                     </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
-        <div class="row">
-            {% if user.is_authenticated %}
-            <div class="col">
-                <div class="card mb-4 mt-3">
-                    <div class="card-body">
-                        <p>Leave a comment as: {{ user.username }}</p>
-                        <form method="post" style="margin-top: 1.3em;">
-                            {{ comment_form | crispy }}
-                            {% csrf_token %}
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </form>
-                    </div>
+    </div>
+    <div class="row">
+        {% if user.is_authenticated %}
+        <div class="col">
+            <div class="card mb-4 mt-3">
+                <div class="card-body">
+                    <p>Leave a comment as: {{ user.username }}</p>
+                    <form method="post" style="margin-top: 1.3em;">
+                        {{ comment_form | crispy }}
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
                 </div>
             </div>
-            {% endif %}
         </div>
+        {% endif %}
     </div>
 </div>
 {% endif %}
