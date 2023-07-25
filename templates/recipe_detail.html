@@ -3,9 +3,9 @@
 {% block content %}
 
 {% load crispy_forms_tags %}
-<div class="container green-background p-0">
+<div class="container p-0">
     <div class="container pt-3">
-        <div class="card mb-3 recipe-detail-card bg-light">
+        <div class="card mb-3 recipe-detail-card">
             <div class="row no-gutters">
                 <div class="col-12 col-md-4">
                     {% if "placeholder" in recipe.image.url %}
@@ -19,7 +19,7 @@
                     <div class="card-body h-100">
                         <div class="row h-50">
                             <div class="col">
-                                <h1 class="card-title text-left d-sm-inline">{{ recipe.title }}</h1>
+                                <h1 class="card-title page-title text-left d-sm-inline">{{ recipe.title }}</h1>
                                 <p class="card-text">Author: {{ recipe.author }}</p>
                             </div>
                         </div>
@@ -35,6 +35,7 @@
                                 <p>Cook Time: {{ recipe.cook_time }}</p>
                             </div>
                         </div>
+                        <!-- Recipe Action Buttons -->
                         <div class="row h-25 pb-2">
                             <div class="col align-self-end">
                                 <span>
@@ -77,7 +78,7 @@
         <div class="row">
             <div class="col">
                 <div class="card mb-3 recipe-detail-card">
-                    <h5 class="card-header recipe-detail-card">Description</h5>
+                    <h5 class="card-header recipe-detail-header">Description</h5>
                     <div class="card-body">
                         <p class="card-text">{{ recipe.excerpt | safe }}</p>
                     </div>
@@ -89,7 +90,7 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="card mb-3 recipe-detail-card">
-                    <h5 class="card-header recipe-detail-card">Ingredients</h5>
+                    <h5 class="card-header recipe-detail-header">Ingredients</h5>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">{{ recipe.ingredients | safe }}</li>
                     </ul>
@@ -97,7 +98,7 @@
             </div>
             <div class="col-md-6">
                 <div class="card mb-3 recipe-detail-card">
-                    <h5 class="card-header recipe-detail-card">Method</h5>
+                    <h5 class="card-header recipe-detail-header">Method</h5>
                     <div class="card-body">
                         <p class="card-text">{{ recipe.content | safe }}</p>
                     </div>
@@ -105,49 +106,58 @@
             </div>
         </div>
     </div>
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <div class="card">
-                    <div class="card-body">
-                        <h3 class="card-title">Comments</h3>
-                        {% for comment in comments %}
-                        <div>
-                            <p class="font-weight-bold">
-                                {{ comment.name }}
-                                <span class=" text-muted font-weight-normal">
-                                    {{ comment.created_on }}
-                                </span> wrote:
-                            </p>
-                            {{ comment.body | linebreaks }}
+</div>
+<!-- comments section -->
+{% if comments %}
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="card recipe-detail-card">
+                <h3 class="card-header recipe-detail-header text-left">Comments</h3>
+                <div class="card-body">
+                    {% for comment in comments %}
+                    <div>
+                        <p class="font-weight-bold">
+                            {{ comment.name }}
+                            <span class=" text-muted font-weight-normal">
+                                {{ comment.created_on }}
+                            </span>
                             {% if user.is_authenticated and user.username == comment.name %}
-                            <a href="{% url 'update_comment' comment.id %}"><i class="fas fa-edit"></i></a>
-                            <a href="{% url 'delete_comment' comment.id %}"><i class="fas fa-times"></i></a>
+                            <span class="comment-action-btn pl-2">
+                                <a href="{% url 'update_comment' comment.id %}"><i
+                                        class="fas fa-edit link-primary"></i></a>
+                                <a href="{% url 'delete_comment' comment.id %}"><i class="fas fa-times"></i></a>
+                            </span>
                             {% endif %}
-                            <hr>
-                        </div>
-                        {% endfor %}
+                        </p>
+                        {{ comment.body | linebreaks }}
+                        <hr>
                     </div>
+                    {% endfor %}
                 </div>
             </div>
-        </div>
-        <div class="row">
-            {% if user.is_authenticated %}
-            <div class="col">
-                <div class="card mb-3 mt-3">
-                    <div class="card-body">
-                        <p>Leave a comment as: {{ user.username }}</p>
-                        <form method="post" style="margin-top: 1.3em;">
-                            {{ comment_form | crispy }}
-                            {% csrf_token %}
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            {% endif %}
         </div>
     </div>
 </div>
+{% endif %}
+
+{% if user.is_authenticated %}
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="card recipe-detail-card mb-3 mt-3">
+                <div class="card-body">
+                    <p>Leave a comment as: {{ user.username }}</p>
+                    <form method="post" style="margin-top: 1.3em;">
+                        {{ comment_form | crispy }}
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-info">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
 
 {% endblock content %}
