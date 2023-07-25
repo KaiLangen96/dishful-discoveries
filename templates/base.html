@@ -15,10 +15,10 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 
-<body class="bg-light">
+<body class="content">
     <header>
-        <!-- Navigation -->
-        <nav class="navbar navbar-light bg-white navbar-expand-md">
+        <!-- Navbar -->
+        <nav class="navbarnavbar-expand-md">
             <div class="container-fluid">
                 <a class="navbar-brand" href="{% url 'home' %}">Dishful Discoveries</a>
                 <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse"
@@ -110,6 +110,29 @@
         {% endblock content %}
     </main>
     <!-- Footer -->
+    <footer>
+        <div class="container footer-container">
+            <ul class="social-networks">
+                <li>
+                    <a href="https://www.facebook.com/" target="_blank" rel="noopener"
+                        aria-label="Visit our Facebook page (opens in new tab)"><i class="fab fa-facebook"></i></a>
+                </li>
+                <li>
+                    <a href="https://www.instagram.com/" target="_blank" rel="noopener"
+                        aria-label="Visit our Instagram page (opens in new tab)"><i class="fab fa-instagram"></i></a>
+                </li>
+                <li>
+                    <a href="https://twitter.com/" target="_blank" rel="noopener"
+                        aria-label="Visit our Twitter page (opens in new tab)"><i class="fab fa-twitter"></i></a>
+                </li>
+                <li>
+                    <a href="https://www.youtube.com/" target="blank" rel="noopener"
+                        aria-label="Visit out Youtube page (opens in new tab)"><i class="fab fa-youtube"></i></a>
+                </li>
+            </ul>
+        </div>
+    </footer>
+    <!-- Scripts -->
     <script src="https://kit.fontawesome.com/d3c4a3d152.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">

@@ -2,29 +2,75 @@
 
 {% block content %}
 
+<!-- hero section -->
 <section>
-    <div class="container">
+    <div class="container px-2 py-3">
+        <div class="row flex-md-row-reverse py-3">
+            <div class="col-md-7 col-lg-5 p-0 pl-md-5 align-self-center">
+                <img src="/static/images/family_dinner.webp" class="img-fluid family-image" alt="family_dinner">
+            </div>
+            <div class="col-md-5 col-lg-7 hero-text-outer text-center">
+                <h1 class="m-4 hero-text">Embrace the adventure of trying out different dishes every day!</h1>
+                <p class="lead">
 
-    </div>
-</section>
-
-
-<div class="container px-2 py-5">
-    <div class="row flex-lg-row-reverse py-5">
-        <div class="col-lg-5 pl-md-5">
-            <img src="/static/images/family_dinner.jpg" class="img-fluid family-image" alt="family_dinner">
-        </div>
-        <div class="col-lg-7 hero-text-outer text-center">
-            <h1 class="m-4 hero-text">Sign up today to get started</h1>
-            <p class="lead">
-                This is a lead paragraph. It stands out from regular paragraphs.
-            </p>
-            <div>
-                <button type="button" class="btn btn-primary btn-lg">Sign up!</button>
+                </p>
+                <div class="lead">
+                    Join us today to get started
+                    <button type="button" class="btn btn-primary btn-lg d-inline">Sign up!</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</section>
 
+<!-- features section -->
+
+<section class="container-fluid features-outer">
+    <div class="container w-50">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="my-3 pink-text">Tired of the same food every day? Unsure what to cook again?</h2>
+            </div>
+        </div>
+        <hr class="home-break">
+        <div class="row mb-5">
+            <div class="col-12">
+                <p class="my-3 text-center lead">Then Dishful Discoveries is the answer! Find new recipes to cook today!
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid feature-image-outer">
+        <div class="row">
+            <div class="col-12 col-md-4 mb-2">
+                <div class="feature-image mb-2">
+                    <i class="fas fa-hamburger fa-6x"></i>
+                </div>
+                <div>
+                    <h3 class="feature-title">Browse</h3>
+                    <p class="feature-text">Get inspiration from home cooks all over the world. Scroll through a picture
+                        book of delicous recipes until you find the next dish
+                        for you!</p>
+                </div>
+            </div>
+            <div class="col-12 col-md-4 mb-2">
+                <div class="feature-image mb-2">
+                    <i class="fas fa-utensils fa-6x"></i>
+                </div>
+                <h3 class="feature-title">Upload or Like</h3>
+                <p class="feature-text">Upload and manage your own recipes or like the recipe of others and create your
+                    own cookbook!</p>
+            </div>
+            <div class="col-12 col-md-4 mb-2">
+                <div class="feature-image mb-2">
+                    <i class="fas fa-calendar-alt fa-6x"></i>
+                </div>
+                <h3 class="feature-title">Grow</h3>
+                <p class="feature-text">Grow with the community! Start conversations about potential improvements to
+                    others recipes right below their recipe with the comments feature!</p>
+            </div>
+        </div>
+    </div>
+</section>
 
 {%endblock%}
