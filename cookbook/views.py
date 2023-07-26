@@ -194,8 +194,8 @@ class DeleteRecipe(LoginRequiredMixin, UserPassesTestMixin,
 
     def delete(self, request, *args, **kwargs):
         """
-        This function is used to display sucess message given
-        SucessMessageMixin cannot be used in generic.DeleteView.
+        This function is used to display success message given
+        SuccessMessageMixin cannot be used in generic.DeleteView.
         Credit: https://stackoverflow.com/questions/24822509/
         success-message-in-deleteview-not-shown
         """
@@ -267,7 +267,7 @@ class UpdateComment(LoginRequiredMixin, UserPassesTestMixin,
 
     def get_success_url(self):
         """
-        Return to recipe detail view when comment updated sucessfully
+        Return to recipe detail view when comment updated successfully
         """
         recipe = self.object.recipe
         return reverse_lazy('recipe_detail', kwargs={'slug': recipe.slug})
@@ -291,8 +291,8 @@ class DeleteComment(LoginRequiredMixin, UserPassesTestMixin,
 
     def delete(self, request, *args, **kwargs):
         """
-        This function is used to display sucess message given
-        SucessMessageMixin cannot be used in generic.DeleteView.
+        This function is used to display success message given
+        SuccessMessageMixin cannot be used in generic.DeleteView.
         Credit: https://stackoverflow.com/questions/24822509/
         success-message-in-deleteview-not-shown
         """
