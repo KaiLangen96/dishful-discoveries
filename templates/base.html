@@ -25,103 +25,106 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 
-<body class="content">
-    <header>
-        <!-- Navbar -->
-        <nav class="navbarnavbar-expand-lg">
-            <div class="container">
-                <a class="navbar-brand" href="{% url 'home' %}">
-                    <img class="logo-image" src="https://res.cloudinary.com/kailangen/image/upload/v1690383596/logo.png"
-                        alt="headerlogo">
-                </a>
-                <button class="navbar-light navbar-toggler ml-auto" type="button" data-toggle="collapse"
-                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-                    <ul class="navbar-nav mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="{% url 'home' %}">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'browse_recipes' %}">Browse Recipes</a>
-                        </li>
-                        {% if user.is_authenticated %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'add_recipe' %}">Add Recipe</a>
-                        </li>
-                        <li class="nav-item d-block d-lg-none">
-                            <a class="nav-link" href="{% url 'my_recipes' %}">My Recipes</a>
-                        </li>
-                        <li class="nav-item d-block d-lg-none">
-                            <a class="nav-link" href="{% url 'my_likes' %}">My Likes</a>
-                        </li>
-                        <li class="nav-item d-block d-lg-none">
-                            <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>
-                        </li>
-                        {% else %}
-                        <li class="nav-item d-block d-lg-none">
-                            <a class="nav-link" href="{% url 'account_signup' %}">Sign up</a>
-                        </li>
-                        <li class="nav-item d-block d-lg-none">
-                            <a class="nav-link" href="{% url 'account_login' %}">Log in</a>
-                        </li>
-                        {% endif %}
-                    </ul>
-                </div>
-                <div class="d-none d-lg-block">
-                    <ul class="navbar-nav mb-2 mb-lg-0">
-                        {% if user.is_authenticated %}
-                        <li class="nav-item dropdown">
-                            <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                                aria-expanded="false">
-                                <span><i class="fas fa-user profile-icon"></i> {{ user.username }}</span>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{% url 'my_recipes' %}">My Recipes</a>
-                                <a class="dropdown-item" href="{% url 'my_likes' %}">My Likes</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a>
-                            </div>
-                        </li>
-                        {% else %}
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                data-toggle="dropdown" aria-expanded="false">
-                                <span>My Account</span>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{% url 'account_signup' %}">Sign up</a>
-                                <a class="dropdown-item" href="{% url 'account_login' %}">Log in</a>
-                            </div>
-                        </li>
-                        {% endif %}
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <!-- From Code Institute's I Think Therefore I Blog project -->
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 offset-md-2">
-                {% for message in messages %}
-                <div class="alert {{ message.tags }} alert-dismissible fade show" id="msg" role="alert">
-                    {{ message | safe }}
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+<body>
+    <div class="content">
+        <header>
+            <!-- Navbar -->
+            <nav class="navbar navbar-expand-lg">
+                <div class="container">
+                    <a class="navbar-brand" href="{% url 'home' %}">
+                        <img class="logo-image"
+                            src="https://res.cloudinary.com/kailangen/image/upload/v1690383596/logo.png"
+                            alt="headerlogo">
+                    </a>
+                    <button class="navbar-light navbar-toggler ml-auto" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
                     </button>
+                    <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                        <ul class="navbar-nav mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="{% url 'home' %}">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'browse_recipes' %}">Browse Recipes</a>
+                            </li>
+                            {% if user.is_authenticated %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'add_recipe' %}">Add Recipe</a>
+                            </li>
+                            <li class="nav-item d-block d-lg-none">
+                                <a class="nav-link" href="{% url 'my_recipes' %}">My Recipes</a>
+                            </li>
+                            <li class="nav-item d-block d-lg-none">
+                                <a class="nav-link" href="{% url 'my_likes' %}">My Likes</a>
+                            </li>
+                            <li class="nav-item d-block d-lg-none">
+                                <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>
+                            </li>
+                            {% else %}
+                            <li class="nav-item d-block d-lg-none">
+                                <a class="nav-link" href="{% url 'account_signup' %}">Sign up</a>
+                            </li>
+                            <li class="nav-item d-block d-lg-none">
+                                <a class="nav-link" href="{% url 'account_login' %}">Log in</a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                    <div class="d-none d-lg-block">
+                        <ul class="navbar-nav mb-2 mb-lg-0">
+                            {% if user.is_authenticated %}
+                            <li class="nav-item dropdown">
+                                <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                                    aria-expanded="false">
+                                    <span><i class="fas fa-user profile-icon"></i> {{ user.username }}</span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{% url 'my_recipes' %}">My Recipes</a>
+                                    <a class="dropdown-item" href="{% url 'my_likes' %}">My Likes</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a>
+                                </div>
+                            </li>
+                            {% else %}
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-toggle="dropdown" aria-expanded="false">
+                                    <span>My Account</span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{% url 'account_signup' %}">Sign up</a>
+                                    <a class="dropdown-item" href="{% url 'account_login' %}">Log in</a>
+                                </div>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </div>
                 </div>
-                {% endfor %}
+            </nav>
+        </header>
+        <!-- From Code Institute's I Think Therefore I Blog project -->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    {% for message in messages %}
+                    <div class="alert {{ message.tags }} alert-dismissible fade show" id="msg" role="alert">
+                        {{ message | safe }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    {% endfor %}
+                </div>
             </div>
         </div>
+        <main>
+            {% block content %}
+            <!-- Content Goes here -->
+            {% endblock content %}
+        </main>
     </div>
-    <main>
-        {% block content %}
-        <!-- Content Goes here -->
-        {% endblock content %}
-    </main>
     <!-- Footer -->
     <footer>
         <div class="container footer-container">
