@@ -11,7 +11,7 @@ class CategoryAdmin(admin.ModelAdmin):
     Allows admin to manage categories via the admin panel
     """
 
-    list_display = ('category', 'admin')
+    list_display = ('admin', 'name')
 
 
 @admin.register(Recipe)
