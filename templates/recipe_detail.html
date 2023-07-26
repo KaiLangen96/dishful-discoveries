@@ -18,7 +18,7 @@
                 <div class="col-12 col-md-8">
                     <div class="card-body recipe-detail-outer py-2">
                         <div>
-                            <h1 class="card-title page-title recipe-detail-title text-left">{{ recipe.title }}</h1>
+                            <h1 class="card-title page-title recipe-title text-left">{{ recipe.title }}</h1>
                         </div>
                         <p class="card-text">Author: {{ recipe.author }}</p>
                         <div class="mb-5">
@@ -148,7 +148,7 @@
                     <form method="post">
                         {{ comment_form | crispy }}
                         {% csrf_token %}
-                        <button type="submit" class="btn btn-info">Submit</button>
+                        <button type="submit" class="btn btn-outline-dark">Submit</button>
                     </form>
                 </div>
             </div>
