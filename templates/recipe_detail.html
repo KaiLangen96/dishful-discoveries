@@ -33,31 +33,32 @@
                         </div>
                         <!-- recipe action buttons -->
                         <div class="action-buttons-outer d-block">
-                            <span>
-                                <form class="d-inline" action="{% url 'like_recipe' recipe.slug %}" method="POST">
-                                    {% csrf_token %}
-                                    {% if liked %}
-                                    <button class="action-btn btn btn-info" type="submit" name="like_id"
-                                        value="{{recipe.slug}}">
-                                        <i class="fas fa-heart"></i>
-                                    </button>
-                                    {% else %}
-                                    <button class="action-btn btn btn-info" type="submit" name="like_id"
-                                        value="{{recipe.slug}}">
-                                        <i class="far fa-heart"></i>
-                                    </button>
-                                    {% endif %}
-                                </form>
+                            {% if user.is_authenticated %}
+                            <form class="d-inline" action="{% url 'like_recipe' recipe.slug %}" method="POST">
+                                {% csrf_token %}
+                                {% if liked %}
+                                <button class="action-btn btn btn-info" type="submit" name="like_id"
+                                    value="{{recipe.slug}}" aria-label="heart-outline">
+                                    <i class="fas fa-heart"></i>
+                                </button>
+                                {% else %}
+                                <button class="action-btn btn btn-info" type="submit" name="like_id"
+                                    value="{{recipe.slug}}" aria-label="heart-solid">
+                                    <i class="far fa-heart"></i>
+                                </button>
                                 {% endif %}
-                            </span>
+                            </form>
+                            {% endif %}
                             {% if user.is_authenticated and recipe.author == user %}
                             <span>
-                                <a class="action-btn btn btn-info" href="{% url 'update_recipe' recipe.slug %}">
+                                <a class="action-btn btn btn-info" href="{% url 'update_recipe' recipe.slug %}"
+                                    aria-label="edit-recipe">
                                     <i class="fas fa-edit"></i>
                                 </a>
                             </span>
                             <span>
-                                <a class="action-btn btn btn-info" href="{% url 'delete_recipe' recipe.slug %}">
+                                <a class="action-btn btn btn-info" href="{% url 'delete_recipe' recipe.slug %}"
+                                    aria-label="delete-recipe">
                                     <i class="fas fa-times"></i>
                                 </a>
                             </span>
@@ -94,7 +95,7 @@
                 <div class="card mb-3 recipe-detail-card">
                     <h5 class="card-header recipe-detail-header">Method</h5>
                     <div class="card-body">
-                        <p class="card-text">{{ recipe.content | safe }}</p>
+                        <div class="card-text">{{ recipe.method | safe }}</div>
                     </div>
                 </div>
             </div>
@@ -118,10 +119,10 @@
                             </span>
                             {% if user.is_authenticated and user.username == comment.name %}
                             <span class="comment-action-btn pl-2">
-                                <a href="{% url 'update_comment' comment.id %}">
+                                <a href="{% url 'update_comment' comment.id %}" aria-label="update-comment">
                                     <i class="fas fa-edit link-primary"></i>
                                 </a>
-                                <a href="{% url 'delete_comment' comment.id %}">
+                                <a href="{% url 'delete_comment' comment.id %}" aria-label="delete-comment">
                                     <i class="fas fa-times"></i>
                                 </a>
                             </span>
@@ -144,7 +145,7 @@
             <div class="card recipe-detail-card mb-3 mt-3">
                 <div class="card-body">
                     <p>Leave a comment as: {{ user.username }}</p>
-                    <form method="post" style="margin-top: 1.3em;">
+                    <form method="post">
                         {{ comment_form | crispy }}
                         {% csrf_token %}
                         <button type="submit" class="btn btn-info">Submit</button>
