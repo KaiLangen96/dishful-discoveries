@@ -8,27 +8,25 @@
 {% block content %}
 
 <div class="container">
+    <h1 class="page-title">{% trans "Log in" %}</h1>
+    <hr class="home-break">
+    <br>
+    <p class="text-center mt-3">{% blocktrans %}
+        Welcome back to Dishful Discoveries.
+        <br>In order to add new recipes or view your liked recipes, please log in.
+        <br>Not registered yet? - Then please
+        <a href="{{ signup_url }}">Sign up</a>{% endblocktrans %}
+    </p>
     <div class="row justify-content-center">
-        <div class="col-11 col-md-4 mt-3">
-            <h1>{% trans "Log in" %}</h1>
-            <p class="text-center mt-3">{% blocktrans %} Welcome back to Dishful Discoveries. In order to add new
-                recipes or to view your liked recipes please log in. Not registered yet? - Then please
-                <a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}
-            </p>
-        </div>
-    </div>
-    <div class="row justify-content-center">
-        <div class="col-11 col-md-4 mt-3">
+        <div class="col-11 col-md-6 col-lg-4 mt-3">
             <form class="login" method="POST" action="{% url 'account_login' %}">
                 {% csrf_token %}
                 {{ form.as_p }}
                 {% if redirect_field_value %}
                 <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
                 {% endif %}
-                <button class="btn btn-outline-light" type="submit">{% trans "Log in" %}</button>
+                <button class="btn btn-info" type="submit">{% trans "Log in" %}</button>
             </form>
-
-
         </div>
     </div>
 </div>
