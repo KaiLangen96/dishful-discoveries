@@ -29,7 +29,7 @@ class RecipeForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(RecipeForm, self).__init__(*args, **kwargs)
-        self.fields['excerpt'].widget = forms.Textarea(attrs={'rows': 3})
+        self.fields['description'].widget = forms.Textarea(attrs={'rows': 3})
 
     class Meta:
         """
@@ -39,14 +39,14 @@ class RecipeForm(forms.ModelForm):
         fields = [
             'title',
             'category',
-            'excerpt',
+            'description',
             'preparation_time',
             'cook_time',
-            'content',
+            'directions',
             'ingredients',
             'image',
         ]
         widgets = {
-            'content': SummernoteWidget(),
+            'directions': SummernoteWidget(),
             'ingredients': SummernoteWidget(),
         }

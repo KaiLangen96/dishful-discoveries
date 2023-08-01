@@ -32,9 +32,9 @@ class Recipe(models.Model):
     updated_on = models.DateTimeField(auto_now=True)
     preparation_time = models.CharField(max_length=10, default=0)
     cook_time = models.CharField(max_length=10, default=0)
-    excerpt = models.TextField(blank=True)
+    description = models.TextField(blank=True)
     ingredients = models.TextField()
-    content = models.TextField()
+    directions = models.TextField()
     image = CloudinaryField('image', default='placeholder')
     likes = models.ManyToManyField(
         User, related_name='likes', default=None, blank=True)
