@@ -301,7 +301,7 @@ class DeleteComment(LoginRequiredMixin, UserPassesTestMixin,
 
     def get_success_url(self):
         """
-        Return to recipe detail view when comment deleted sucessfully
+        Return to recipe detail view when comment deleted successfully
         """
         recipe = self.object.recipe
         return reverse_lazy('recipe_detail', kwargs={'slug': recipe.slug})

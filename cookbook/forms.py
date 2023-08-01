@@ -18,8 +18,8 @@ class CommentForm(forms.ModelForm):
         """
         Get comment model, choose fields to display
         """
-    model = Comment
-    fields = ('body',)
+        model = Comment
+        fields = ('body',)
 
 
 class RecipeForm(forms.ModelForm):
