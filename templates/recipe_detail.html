@@ -75,7 +75,7 @@
                 <div class="card mb-3 recipe-detail-card">
                     <h5 class="card-header recipe-detail-header">Description</h5>
                     <div class="card-body">
-                        <p class="card-text">{{ recipe.excerpt | safe }}</p>
+                        <p class="card-text">{{ recipe.description | safe }}</p>
                     </div>
                 </div>
             </div>
@@ -93,9 +93,9 @@
             </div>
             <div class="col-md-6">
                 <div class="card mb-3 recipe-detail-card">
-                    <h5 class="card-header recipe-detail-header">Method</h5>
+                    <h5 class="card-header recipe-detail-header">Directions</h5>
                     <div class="card-body">
-                        <div class="card-text">{{ recipe.content | safe }}</div>
+                        <div class="card-text">{{ recipe.directions | safe }}</div>
                     </div>
                 </div>
             </div>
