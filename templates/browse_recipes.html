@@ -19,7 +19,7 @@
                 <img src="https://res.cloudinary.com/kailangen/image/upload/v1690288515/placeholder.jpg"
                     class="card-img-top" alt="placeholder image">
                 {% else %}
-                <img src=" {{ recipe.image.url }}" alt="recipe image" class="card-img-top">
+                <img src="{{ recipe.image.url }}" alt="recipe image" class="card-img-top">
                 {% endif %}
                 <div class="card-body pb-1">
                     <h2 class="card-title recipe-detail-title text-truncate">{{ recipe.title }}</h2>
