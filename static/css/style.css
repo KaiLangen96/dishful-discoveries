@@ -21,6 +21,10 @@ body {
     text-align: center;
 }
 
+.margin-top {
+    margin-top: 10px;
+}
+
 /* Nav */
 
 .navbar {
